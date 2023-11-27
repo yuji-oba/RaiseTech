@@ -24,7 +24,7 @@
 
 #### 課題①
 
-![2.アプリ起動ブラウザ_2023-11-26 0.25.55](https://github.com/yuji-oba/Garage/blob/main/1.%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA%E8%B5%B7%E5%8B%95_%202023-11-26%200.23.06.png)
+![2.アプリ起動ブラウザ_2023-11-26 0.25.55](https://github.com/yuji-oba/Garage/blob/main/2.%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA%E8%B5%B7%E5%8B%95%E3%83%95%E3%82%99%E3%83%A9%E3%82%A6%E3%82%B5%E3%82%99_2023-11-26%200.25.55.png)
 
 サンプルアプリをブラウザで確認。
 
@@ -173,27 +173,27 @@ bin/cloud9_dev
 
 1. アプリを起動する`bin/cloud9_dev`
 
-![1.アプリ起動_ 2023-11-26 0.23.06](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/1.アプリ起動_ 2023-11-26 0.23.06.png)
+![1.アプリ起動_ 2023-11-26 0.23.06](https://github.com/yuji-oba/Garage/blob/main/1.%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA%E8%B5%B7%E5%8B%95_%202023-11-26%200.23.06.png)
 
 2.ブラウザの確認と `GET` `POST` されているか確認
 
-![2.アプリ起動ブラウザ_2023-11-26 0.25.55](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/2.アプリ起動ブラウザ_2023-11-26 0.25.55.png)
+![2.アプリ起動ブラウザ_2023-11-26 0.25.55](https://github.com/yuji-oba/Garage/blob/main/2.%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA%E8%B5%B7%E5%8B%95%E3%83%95%E3%82%99%E3%83%A9%E3%82%A6%E3%82%B5%E3%82%99_2023-11-26%200.25.55.png)
 
 3. APサーバー停止 `ctrl + c` → puma停止
 
-![3.puma停止2023-11-26 0.28.34](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/3.puma停止2023-11-26 0.28.34.png)
+![3.puma停止2023-11-26 0.28.34](https://github.com/yuji-oba/Garage/blob/main/3.puma%E5%81%9C%E6%AD%A22023-11-26%200.28.34.png)
 
 4. APサーバーpuma停止後のブラウザ
 
-![4.puma停止後のブラウザ_2023-11-26 0.30.31](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/4.puma停止後のブラウザ_2023-11-26 0.30.31.png)
+![4.puma停止後のブラウザ_2023-11-26 0.30.31](https://github.com/yuji-oba/Garage/blob/main/4.puma%E5%81%9C%E6%AD%A2%E5%BE%8C%E3%81%AE%E3%83%95%E3%82%99%E3%83%A9%E3%82%A6%E3%82%B5%E3%82%99_2023-11-26%200.30.31.png)
 
 5. APサーバーpuma再起動 `rails s`コマンドでアプリケーションのサーバーを起動
 
-![](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/5.puma再起動_ 2023-11-26 0.31.58.png)
+![5.puma再起動_ 2023-11-26 0.31.58](https://github.com/yuji-oba/Garage/blob/main/5.puma%E5%86%8D%E8%B5%B7%E5%8B%95_%202023-11-26%200.31.58.png)
 
 6. puma再起動後ブラウザ確認。`GET` `POST`共に問題ない。
 
-![6.puma再起動後_2023-11-26 1.25.43](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/6.puma再起動後_2023-11-26 1.25.43.png)
+![6.puma再起動後_2023-11-26 1.25.43](https://github.com/yuji-oba/Garage/blob/main/6.puma%E5%86%8D%E8%B5%B7%E5%8B%95%E5%BE%8C_2023-11-26%201.25.43.png)
 
 
 
@@ -216,7 +216,7 @@ bin/cloud9_dev
 - MySQLログイン時に確認
 - MySQLログイン後、`select version();` 、`status`で確認できる
 
-![7.mysqlバージョン確認_ 2023-11-26 1.39.18](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/7.mysqlバージョン確認_ 2023-11-26 1.39.18.png)
+![7.mysqlバージョン確認_ 2023-11-26 1.39.18](https://github.com/yuji-oba/Garage/blob/main/7.mysql%E3%83%8F%E3%82%99%E3%83%BC%E3%82%B7%E3%82%99%E3%83%A7%E3%83%B3%E7%A2%BA%E8%AA%8D_%202023-11-26%201.39.18.png)
 
 
 
@@ -226,7 +226,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
 `rails s` でAPサーバーを起動すると、ターミナルで`ActiveRecord::ConnectionNotEstablished (Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)):`MySQLに繋げないとのエラーログ
 
-![8.DBサーバー停止後のAPサーバー再起動_ 2023-11-26 1.48.11](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/8.DBサーバー停止後のAPサーバー再起動_ 2023-11-26 1.48.11.png)
+![8.DBサーバー停止後のAPサーバー再起動_ 2023-11-26 1.48.11](https://github.com/yuji-oba/Garage/blob/main/8.DB%E3%82%B5%E3%83%BC%E3%83%8F%E3%82%99%E3%83%BC%E5%81%9C%E6%AD%A2%E5%BE%8C%E3%81%AEAP%E3%82%B5%E3%83%BC%E3%83%8F%E3%82%99%E3%83%BC%E5%86%8D%E8%B5%B7%E5%8B%95_%202023-11-26%201.48.11.png)
 
 
 
@@ -234,7 +234,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
 `**Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)**`とエラーメッセージ
 
-![](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/９.DBサーバー停止後のブラウザ画面_2023-11-26 1.46.55.png)
+![９.DBサーバー停止後のブラウザ画面_2023-11-26 1.46.55](https://github.com/yuji-oba/Garage/blob/main/%EF%BC%99.DB%E3%82%B5%E3%83%BC%E3%83%8F%E3%82%99%E3%83%BC%E5%81%9C%E6%AD%A2%E5%BE%8C%E3%81%AE%E3%83%95%E3%82%99%E3%83%A9%E3%82%A6%E3%82%B5%E3%82%99%E7%94%BB%E9%9D%A2_2023-11-26%201.46.55.png)
 
 
 
@@ -244,7 +244,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
 `sudo service mysqld status`でDBサーバーを再移動して動いているか再度確認
 
-![10.MySQL状態確認と再起動_2023-11-26 2.09.29](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/10.MySQL状態確認と再起動_2023-11-26 2.09.29.png)
+![10.MySQL状態確認と再起動_2023-11-26 2.09.29](https://github.com/yuji-oba/Garage/blob/main/10.MySQL%E7%8A%B6%E6%85%8B%E7%A2%BA%E8%AA%8D%E3%81%A8%E5%86%8D%E8%B5%B7%E5%8B%95_2023-11-26%202.09.29.png)
 
 
 
@@ -252,7 +252,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
    `GET` `POST`が機能していることも確認できた。
 
-![11.DBサーバー再起動後の確認スクリーンショット 2023-11-26 2.21.57](/Users/Yuji/Desktop/RaiseTech_AWS/AWSフルコース第3回_提出課題/11.DBサーバー再起動後の確認スクリーンショット 2023-11-26 2.21.57.png)
+![11.DBサーバー再起動後の確認スクリーンショット 2023-11-26 2.21.57](https://github.com/yuji-oba/Garage/blob/main/11.DB%E3%82%B5%E3%83%BC%E3%83%8F%E3%82%99%E3%83%BC%E5%86%8D%E8%B5%B7%E5%8B%95%E5%BE%8C%E3%81%AE%E7%A2%BA%E8%AA%8D%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202023-11-26%202.21.57.png)
 
 #### Rubyの構成管理ツールについて
 
@@ -277,13 +277,11 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 - APサーバの扱い方
 - Gem 構成管理ツール
 
-サンプルアプリをデプロイしたが、必要なGemやツールのインストール、バージョンを合わせる、権限の設定変更など、多くあることがわかった。簡単なアプリだったからなんとかなったが、もっと複雑なアプリなどでは設定するだけでも、多くのツールやソフトのインストールが必要になるのだろうと感じた。
-
-また、今回は講座内での手順を参考に進めたが、これがBundlerを使えば簡単に済むとのことなのだろうか？
-
-調べてみたいし、試してみたい。
-
+サンプルアプリをデプロイしたが、必要なGemやツールのインストール、バージョンを合わせる、権限の設定変更など、多くあることがわかった。
+簡単なアプリだったからなんとかなったが、もっと複雑なアプリなどでは設定するだけでも、多くのツールやソフトのインストールが必要になるのだろうと感じた。
 構成管理ツールはそれぞれの言語に複数あるのがわかった。しかも、メジャーか、使いやすいか、出来ることできない事など差もかなりある。
-
 まだ、注意すべき部分がどこで、何かが分からないので時間もかかるし、労力かかるが、理解して数をこなせば楽にこなせるようになると信じてやっていきたい。
-
+今回は講座内での手順を参考に進めたが、これがBundlerを使えば簡単に済むとのことなのだろうか？
+調べてみたいし、試してみたい。
+コマンドの多さに絶望を感じたが、講師のウシジマさんが何度かコマンドのリストのようなものやusageを出していたのに気がついた。
+きっとコマンドを全部覚えているわけではないみたいだ。百戦錬磨のエンジニアでも確認しながら進めている事に少しだけ安心した。
