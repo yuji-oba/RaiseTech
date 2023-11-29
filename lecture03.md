@@ -24,7 +24,7 @@
 
 #### 課題①
 
-![2.アプリ起動ブラウザ_2023-11-26 0.25.55](/images/2.アプリ起動ブラウザ_2023-11-26 0.25.55.png)
+![02](/images/lecture03/02_sampleap_browser_20231126.png)
 
 サンプルアプリをブラウザで確認。
 
@@ -173,27 +173,27 @@ bin/cloud9_dev
 
 1. アプリを起動する`bin/cloud9_dev`
 
-![1.アプリ起動_ 2023-11-26 0.23.06](/images/1.アプリ起動_ 2023-11-26 0.23.06.png)
+![01](/images/lecture03/01_sampleap_tarminal_20231126.png)
 
 2.ブラウザの確認と `GET` `POST` されているか確認
 
-![2.アプリ起動ブラウザ_2023-11-26 0.25.55](/images/2.アプリ起動ブラウザ_2023-11-26 0.25.55.png)
+![02](/images/lecture03/02_sampleap_browser_20231126.png)
 
 3. APサーバー停止 `ctrl + c` → puma停止
 
-![3.puma停止2023-11-26 0.28.34](/images/3.puma停止2023-11-26 0.28.34.png)
+![03](/images/lecture03/03_pumastop_20231126.png)
 
 4. APサーバーpuma停止後のブラウザ
 
-![4.puma停止後のブラウザ_2023-11-26 0.30.31](/images/4.puma停止後のブラウザ_2023-11-26 0.30.31.png)
+![04](/images/lecture03/04_pumastopbrowser_20231126.png)
 
 5. APサーバーpuma再起動 `rails s`コマンドでアプリケーションのサーバーを起動
 
-![5.puma再起動_ 2023-11-26 0.31.58](/images/5.puma再起動_ 2023-11-26 0.31.58.png)
+![05](/images/lecture03/05_pumarestart_20231126.png)
 
 6. puma再起動後ブラウザ確認。`GET` `POST`共に問題ない。
 
-![6.puma再起動後_2023-11-26 1.25.43](/images/6.puma再起動後_2023-11-26 1.25.43.png)
+![06](/images/lecture03/06_pumarestart_20231126.png)
 
 
 
@@ -216,7 +216,7 @@ bin/cloud9_dev
 - MySQLログイン時に確認
 - MySQLログイン後、`select version();` 、`status`で確認できる
 
-![7.mysqlバージョン確認_ 2023-11-26 1.39.18](/images/7.mysqlバージョン確認_ 2023-11-26 1.39.18.png)
+![07](/images/lecture03/07_mysqlver_20231126.png)
 
 
 
@@ -226,7 +226,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
 `rails s` でAPサーバーを起動すると、ターミナルで`ActiveRecord::ConnectionNotEstablished (Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)):`MySQLに繋げないとのエラーログ
 
-![8.DBサーバー停止後のAPサーバー再起動_ 2023-11-26 1.48.11](/images/8.DBサーバー停止後のAPサーバー再起動_ 2023-11-26 1.48.11.png)
+![08](/images/lecture03/08_DBstopAPrestart_20231126.png)
 
 
 
@@ -234,7 +234,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
 `**Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)**`とエラーメッセージ
 
-![９.DBサーバー停止後のブラウザ画面_2023-11-26 1.46.55](/images/９.DBサーバー停止後のブラウザ画面_2023-11-26 1.46.55.png)
+![09](/images/lecture03/09_DBstopbrowser_20231126.png)
 
 
 
@@ -244,7 +244,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
 `sudo service mysqld status`でDBサーバーを再移動して動いているか再度確認
 
-![10.MySQL状態確認と再起動_2023-11-26 2.09.29](/images/10.MySQL状態確認と再起動_2023-11-26 2.09.29.png)
+![10](/images/lecture03/10_mysqlrestart_20231126.png)
 
 
 
@@ -252,7 +252,7 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 
    `GET` `POST`が機能していることも確認できた。
 
-![11.DBサーバー再起動後の確認スクリーンショット 2023-11-26 2.21.57](/images/11.DBサーバー再起動後の確認スクリーンショット 2023-11-26 2.21.57.png)
+![11](/images/lecture03/11_DBrestart_20231126.png)
 
 #### Rubyの構成管理ツールについて
 
@@ -285,3 +285,14 @@ APサーバーを停止して`sudo service mysqld stop`でDBサーバーを停�
 調べてみたいし、試してみたい。
 コマンドの多さに絶望を感じたが、講師のウシジマさんが何度かコマンドのリストのようなものやusageを出していたのに気がついた。
 きっとコマンドを全部覚えているわけではないみたいだ。百戦錬磨のエンジニアでも確認しながら進めている事に少しだけ安心した。
+PR後に画像ファイルアップロードの見直しをした。gitにpushしても画像が表示されない現象の解決に手間取った。
+画像のファイル名の日本語部分が上手く認識されていなかったみたいである。
+
+```bash
+![01](/images/1.アプリ起動_ 2023-11-26 0.23.06.png)
+`日本語部分に下線が引かれない｀
+
+![01](/images/lecture03/01_sampleap_tarminal_20231126.png)
+`正常に認識`
+```
+![12](/images/lecture03/12_filenaming_20231130.png)
