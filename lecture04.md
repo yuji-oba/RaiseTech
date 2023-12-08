@@ -38,7 +38,7 @@
 
 アウトバウンドルール
 
-![rds_04_sgoutbound_20231209](/RaiseTech/images/lecture04/rds_04_sgoutbound_20231209.png)
+![rds_04_sgoutbound_20231209](/images/lecture04/rds_04_sgoutbound_20231209.png)
 
 
 
