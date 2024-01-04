@@ -156,7 +156,7 @@ bin/setup
 - セキュリティグループ変更
   - 3000ポートの開放
 
-![09_ec2](images/09_ec2.jpg)
+![09_ec2](images/lecture05/09_ec2.jpg)
 
 
 
@@ -178,9 +178,9 @@ bin/dev
 
     
 
-![10_web](images/10_web.jpg)
+![10_web](images/lecture05/10_web.jpg)
 
-![11_web](images/11_web.jpg)
+![11_web](images/lecture05/11_web.jpg)
 
 
 
@@ -202,7 +202,7 @@ default: &default
 
 - ブラウザで確認
 
-![12_web](images/12_web.jpg)
+![12_web](images/lecture05/12_web.jpg)
 
 - MySQLでDB確認
 
@@ -258,11 +258,11 @@ bundle exec unicorn -c config/unicorn.rb -D -E development
 
 - ブラウザから3000ポートにアクセス
 
-![03_unicorn](images/03_unicorn.jpg)
+![03_unicorn](images/lecture05/03_unicorn.jpg)
 
 - DBへの登録も確認
 
-![06_unicorn](images/06_unicorn.jpg)
+![06_unicorn](images/lecture05/06_unicorn.jpg)
 
 
 
@@ -321,7 +321,7 @@ Commercial support is available at
 
 - ブラウザでも確認
 
-![06_nginx](images/06_nginx.jpg)
+![06_nginx](images/lecture05/06_nginx.jpg)
 
 
 
@@ -408,11 +408,11 @@ pid    '/home/ec2-user/raisetech-live8-sample-app/unicorn.pid'
 - セキュリティグループ確認
   - 80ポートの開放
 
-![10_nginx](images/10_nginx.jpg)
+![10_nginx](images/lecture05/10_nginx.jpg)
 
 この状態でEC2のパブリックIPにアクセスするとblockedhostエラーが出る
 
-![13_nginx](images/13_nginx.jpg)
+![13_nginx](images/lecture05/13_nginx.jpg)
 
 - blockedhostエラーの解消
 
@@ -426,13 +426,13 @@ pid    '/home/ec2-user/raisetech-live8-sample-app/unicorn.pid'
   - textのみでsave
   - DB登録OK
 
-![14_nginx](images/14_nginx.jpg)
+![14_nginx](images/lecture05/14_nginx.jpg)
 
 - ブラウザ表示 DB登録の確認
   - textと画像でsave
   - DB登録OK
 
-![15_nginx](images/15_nginx.jpg)
+![15_nginx](images/lecture05/15_nginx.jpg)
 
 
 
@@ -440,23 +440,23 @@ pid    '/home/ec2-user/raisetech-live8-sample-app/unicorn.pid'
 
 - アプリをデプロイするvpcにALBを作成
 
-![03_alb](images/03_alb.jpg)
+![03_alb](images/lecture05/03_alb.jpg)
 
-![04_alb](images/04_alb.jpg)
+![04_alb](images/lecture05/04_alb.jpg)
 
 - 途中でターゲットグループを作成
   - インスタンスを`ec2-rt-lecture`指定
   - ポートは80
 
-![11_alb](images/11_alb.jpg)
+![11_alb](images/lecture05/11_alb.jpg)
 
-![12_alb](images/12_alb.jpg)
+![12_alb](images/lecture05/12_alb.jpg)
 
 - ターゲットグループ指定
 
-![14_alb](images/14_alb.jpg)
+![14_alb](images/lecture05/14_alb.jpg)
 
-![17_alb](images/17_alb.jpg)
+![17_alb](images/lecture05/17_alb.jpg)
 
 - nginx.conf内serverディレクティブでALBのDNS名を指定
   - DNS名：`alb-ec2-rt-lecture-sample-app-535061234.ap-northeast-1.elb.amazonaws.com`
@@ -477,14 +477,14 @@ server {
   - nginx起動
   - ヘルスチェックが通るのを確認
 
-![18_alb](images/18_alb.jpg)
+![18_alb](images/lecture05/18_alb.jpg)
 
 
 
 - ALBのDNS名でブラウザからアクセス。
   - DNS 名：`alb-ec2-rt-lecture-sample-app-535061234.ap-northeast-1.elb.amazonaws.com`
 
-![19_alb](images/19_alb.jpg)
+![19_alb](images/lecture05/19_alb.jpg)
 
 blockedhostエラー
 
@@ -504,11 +504,11 @@ blockedhostエラー
 
 - ブラウザの表示
 
-![20_alb](images/20_alb.jpg)
+![20_alb](images/lecture05/20_alb.jpg)
 
 - textとimageが登録されるのを確認
 
-![23_alb](images/23_alb.jpg)
+![23_alb](images/lecture05/23_alb.jpg)
 
 
 
@@ -517,26 +517,26 @@ blockedhostエラー
 - バケットの作成
   - バケット名:ec2-rt-lecture-raisetech-live8-sample-app
 
-![07_s3](images/07_s3.jpg)
+![07_s3](images/lecture05/07_s3.jpg)
 
 
 
 - S3にIAMロールをアタッチ
   - S3Fullaccessを許可してIAMロールを作成
 
-![18_s3](images/18_s3.jpg)
+![18_s3](images/lecture05/18_s3.jpg)
 
 
 
 - EC2インスタンスにIAMロールをアタッチ
 
-![19_s3](images/19_s3.jpg)
+![19_s3](images/lecture05/19_s3.jpg)
 
 
 
 - EC2インスタンスにIAMロールが追記されたのを確認
 
-![20_s3](images/20_s3.jpg)
+![20_s3](images/lecture05/20_s3.jpg)
 
 
 
@@ -568,15 +568,19 @@ config.active_storage.service = :amazon
 
 画像を登録
 
-![23_s3](images/23_s3.jpg)
+![23_s3](images/lecture05/23_s3.jpg)
 
-![24_s3](images/24_s3.jpg)
+![24_s3](images/lecture05/24_s3.jpg)
 
 - 登録は成功
 
-![25_s3](images/25_s3.jpg)
+![25_s3](images/lecture05/25_s3.jpg)
 
 
 - マネジメントコンソールから画像が格納されていること確認
 
-![26_s3](images/26_s3.jpg)
+![26_s3](images/lecture05/26_s3.jpg)
+
+
+#### 構成図
+![diagram](images/lecture05/lecture05_diagram.jpg)
