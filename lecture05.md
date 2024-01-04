@@ -1,15 +1,15 @@
-### 第5回課題
+# 第5回課題
 
-#### AWSリソースの確認
+## AWSリソースの確認
 
-#### VPC
+### VPC
+- VPC
+  - vpc-014d5ac0a92a70701 / raisetech-lecture-vpc
 
-vpc-014d5ac0a92a70701 / raisetech-lecture-vpc
+![01_vpc](images/lecture05/01_vpc.jpg)
 
 
-
-#### EC2
-
+### EC2
 - VPC ID
   - vpc-014d5ac0a92a70701 / raisetech-lecture-vpc
 
@@ -17,10 +17,34 @@ vpc-014d5ac0a92a70701 / raisetech-lecture-vpc
   - subnet-0694b05933b99fddf / raisetech-lecture-subnet-public1-ap-northeast-1a
 
 - セキュリティグループ
-  - sg-07ddb659618702bfd - ec2-rt-lecture-sg
+  - sg-07ddb659618702bfd(ec2-rt-lecture-sg)
+  - インバウンドルール
 
-#### RDS
+  |      | Name | セキュリティグループルール ID | IP バージョン | タイプ | プロトコル | ポート範囲 | ソース            | 説明              |
+  | :--- | :--- | :---------------------------- | :------------ | :----- | :--------- | :--------- | :---------------- | :---------------- |
+  |      | –    | sgr-0471013f4ddecf698         | IPv4          | SSH    | TCP        | 22         | 106.73.168.225/32 | ssh for admin mac |
 
+  - アウトバンドルール
+
+  | 名前 | セキュリティグループルール ID | ポート範囲 | プロトコル | 送信先    | セキュリティグループ | 説明 |
+  | :--- | :---------------------------- | :--------- | :--------- | :-------- | :------------------- | :--- |
+  | –    | sgr-019d2f04486442e29         | すべて     | すべて     | 0.0.0.0/0 | ec2-rt-lecture-sg    | –    |
+
+
+- EC2 / VPC サブネット
+
+![02_ec2](images/lecture05/01_vpc.jpg)
+
+![15_ec2](images/lecture05/15_ec2.jpg)
+
+
+- EC2 / セキュリティグループ
+
+![03_ec2](images/lecture05/03_ec2.jpg)
+
+
+
+### RDS
 - AZ
   - ap-northeast-1a
 
@@ -31,23 +55,49 @@ vpc-014d5ac0a92a70701 / raisetech-lecture-vpc
   - sbntg-db-mysql-rt-lecture
 
 - サブネット
-  - subnet-0c11603d97e4db85b
-  - subnet-0db1f0f80f8a04693
+  - subnet-0c11603d97e4db85b / raisetech-lecture-subnet-private2-ap-northeast-1c
+  - subnet-0db1f0f80f8a04693 / raisetech-lecture-subnet-private1-ap-northeast-1a
+
+- セキュリティグループ
+  - sg-0bace50828606feff - db-mysql-rt-lecture-sg
+  - インバウンドルール
+
+  |      | Name | セキュリティグループルール ID | IP バージョン | タイプ       | プロトコル | ポート範囲 | ソース                                   | 説明                     |
+  | :--- | :--- | :---------------------------- | :------------ | :----------- | :--------- | :--------- | :--------------------------------------- | :----------------------- |
+  |      | –    | sgr-0bb3032a9aa42610b         | –             | MYSQL/Aurora | TCP        | 3306       | sg-07ddb659618702bfd / ec2-rt-lecture-sg | allow db mysql for admin |
+
+  - アウトバウンドルール
+
+  |      | Name | セキュリティグループルール ID | IP バージョン | タイプ               | プロトコル | ポート範囲 | 送信先    | 説明 |
+  | :--- | :--- | :---------------------------- | :------------ | :------------------- | :--------- | :--------- | :-------- | :--- |
+  |      | –    | sgr-02d94567df1122e0f         | IPv4          | すべてのトラフィック | すべて     | すべて     | 0.0.0.0/0 | –    |
 
 
+- RDS / AZ VPC サブネットグループ サブネット セキュリティグループ
+![04_rds](images/lecture05/04_rds.jpg)
 
-#### EC2環境構築
+- RDS / AZ VPC サブネット
+![05_rds](images/lecture05/05_rds.jpg)
 
-- raisetech-live8-sample-appのREADMEから動作環境のソフトやgemなど確認
+- セキュリティ インバウンドルール
+![13_rds](images/lecture05/13_rds.jpg)
 
-  動作環境
+- セキュリティ アウトバウンドルール
+![14_rds](images/lecture05/14_rds.jpg)
 
+
+## 環境構築
+
+### 動作環境の確認
+
+- raisetech-live8-sample-appのREADME
   - `ruby 3.1.2`
   - `Bundler 2.3.14`
   - `Rails 7.0.4`
   - `Node v17.9.1`
   - `yarn 1.22.19`
 
+### EC2環境構築
 - サーバーアップデート
 
 ```bash
@@ -159,34 +209,34 @@ bin/setup
 ![09_ec2](images/lecture05/09_ec2.jpg)
 
 
+## 組み込みサーバーでのデプロイと動作確認
 
-- アプリを組み込みサーバーで公開 ec2-MySQL
+### EC2のMySQLに接続して確認
+
+- アプリを組み込みサーバーで公開
+  - EC2のMySQLに接続している状態
+  - railsサーバーの起動は指定のコマンドにて実行
 
 ```bash
 bin/dev
 ```
 
 
-
 - ブラウザでアクセス
-
   - ec2のパブリックIP`13.231.37.28`に`:3000`をつけてアクセス
-
   - ポストができていることも確認
-
   - EC2のMySQLに繋いでいる状態
-
-    
 
 ![10_web](images/lecture05/10_web.jpg)
 
 ![11_web](images/lecture05/11_web.jpg)
 
 
+### RDSに接続
 
-- RDSのMy SQLをDBとして繋ぐ
+- RDSのMySQLをDBとして接続
   - `database.yml`を編集
-  - RDSのエンドポイントに繋ぐ
+  - RDSのエンドポイントに接続
 
 ```zsh
 default: &default
@@ -197,7 +247,6 @@ default: &default
   password: **********
   host: db-mysql-rt-lecture.cdtllrfhq8ji.ap-northeast-1.rds.amazonaws.com
 ```
-
 
 
 - ブラウザで確認
@@ -239,7 +288,9 @@ mysql> select * from fruits;
 1 row in set (0.00 sec)
 ```
 
-#### Unicorn単体でのアプリ起動
+## サーバーアプリケーションを分けてデプロイと動作確認
+
+### unicorn単体でのアプリ起動
 
 - `unicorn.rb`の記述変更
   - `listen 3000`を追記 `unicorn.sock`に繋ぐのをコメントアウト
@@ -260,13 +311,15 @@ bundle exec unicorn -c config/unicorn.rb -D -E development
 
 ![03_unicorn](images/lecture05/03_unicorn.jpg)
 
+
 - DBへの登録も確認
 
 ![06_unicorn](images/lecture05/06_unicorn.jpg)
 
 
+### Nginxの設定
 
-#### Nginx
+#### Nginxインストール
 
 - Nginxを有効化
 
@@ -287,8 +340,6 @@ sudo systemctl start nginx
 ```
 
 - curlでnginx起動しているか確認
-
-- 
 
 ```zsh
 curl localhost
@@ -318,14 +369,12 @@ Commercial support is available at
 ```
 
 
-
 - ブラウザでも確認
 
 ![06_nginx](images/lecture05/06_nginx.jpg)
 
 
-
-#### unicornとNginxの連携でDBに登録する
+### unicornとNginxの連携でDBに登録する
 
 - `/etc/nginx/nginx.conf`マスターファイルの修正
 
@@ -410,39 +459,43 @@ pid    '/home/ec2-user/raisetech-live8-sample-app/unicorn.pid'
 
 ![10_nginx](images/lecture05/10_nginx.jpg)
 
-この状態でEC2のパブリックIPにアクセスするとblockedhostエラーが出る
+
+- ブラウザからアクセス
+  - EC2のパブリックIPでアクセス
+  - blockedhostエラーが出る
 
 ![13_nginx](images/lecture05/13_nginx.jpg)
 
+
 - blockedhostエラーの解消
+  - `/config/environments/development.rb`を修正
+  - `config.hosts << "unicorn_ec2-rt-lecture"`を追記
 
-`config.hosts << "unicorn_ec2-rt-lecture"`を
+- ブラウザ表示 DB登録と動作確認
 
-`/home/ec2-user/raisetech-live8-sample-app/config/environments/development.rb`に追記
-
-
-
-- ブラウザ表示 DB登録の確認
-  - textのみでsave
+  - EC2のパブリックIPでアクセス
+  - textのみで保存
   - DB登録OK
 
 ![14_nginx](images/lecture05/14_nginx.jpg)
 
-- ブラウザ表示 DB登録の確認
-  - textと画像でsave
+
+- ブラウザ表示 DB登録と動作確認
+  - EC2のパブリックIPでアクセス
+  - textと画像で保存
   - DB登録OK
 
 ![15_nginx](images/lecture05/15_nginx.jpg)
 
 
-
-#### ALBの作成とアタッチ
+## ALBの作成とアタッチ
 
 - アプリをデプロイするvpcにALBを作成
 
 ![03_alb](images/lecture05/03_alb.jpg)
 
 ![04_alb](images/lecture05/04_alb.jpg)
+
 
 - 途中でターゲットグループを作成
   - インスタンスを`ec2-rt-lecture`指定
@@ -458,6 +511,7 @@ pid    '/home/ec2-user/raisetech-live8-sample-app/unicorn.pid'
 
 ![17_alb](images/lecture05/17_alb.jpg)
 
+
 - nginx.conf内serverディレクティブでALBのDNS名を指定
   - DNS名：`alb-ec2-rt-lecture-sample-app-535061234.ap-northeast-1.elb.amazonaws.com`
 
@@ -471,7 +525,6 @@ server {
 ```
 
 
-
 - サーバーを起動しALBのDNSにアクセスする
   - unicorn起動
   - nginx起動
@@ -480,14 +533,11 @@ server {
 ![18_alb](images/lecture05/18_alb.jpg)
 
 
-
 - ALBのDNS名でブラウザからアクセス。
   - DNS 名：`alb-ec2-rt-lecture-sample-app-535061234.ap-northeast-1.elb.amazonaws.com`
+  - blockedhostエラーが出る
 
 ![19_alb](images/lecture05/19_alb.jpg)
-
-blockedhostエラー
-
 
 
 - blockedhostエラー解消
@@ -500,11 +550,8 @@ blockedhostエラー
   - ブラウザから再度アクセス
   - DNS名：`alb-ec2-rt-lecture-sample-app-535061234.ap-northeast-1.elb.amazonaws.com`
 
-
-
-- ブラウザの表示
-
 ![20_alb](images/lecture05/20_alb.jpg)
+
 
 - textとimageが登録されるのを確認
 
@@ -512,13 +559,13 @@ blockedhostエラー
 
 
 
-#### S3画像を保存する
+
+## S3に画像を保存する
 
 - バケットの作成
   - バケット名:ec2-rt-lecture-raisetech-live8-sample-app
 
 ![07_s3](images/lecture05/07_s3.jpg)
-
 
 
 - S3にIAMロールをアタッチ
@@ -527,11 +574,9 @@ blockedhostエラー
 ![18_s3](images/lecture05/18_s3.jpg)
 
 
-
 - EC2インスタンスにIAMロールをアタッチ
 
 ![19_s3](images/lecture05/19_s3.jpg)
-
 
 
 - EC2インスタンスにIAMロールが追記されたのを確認
@@ -539,11 +584,10 @@ blockedhostエラー
 ![20_s3](images/lecture05/20_s3.jpg)
 
 
-
 - storage.ymlの修正
   - `/config/storage.yml`Amazonのbucketに追記
 
-```zzsh
+```zsh
 amazon:
  service: S3
  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
@@ -563,7 +607,6 @@ config.active_storage.service = :amazon
 ```
 
 
-
 - ブラウザにアクセスしてS3への保存を確かめる
 
 画像を登録
@@ -572,7 +615,7 @@ config.active_storage.service = :amazon
 
 ![24_s3](images/lecture05/24_s3.jpg)
 
-- 登録は成功
+- 登録成功
 
 ![25_s3](images/lecture05/25_s3.jpg)
 
