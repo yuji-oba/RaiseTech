@@ -13,6 +13,9 @@
 - VPC ID
   - vpc-014d5ac0a92a70701 / raisetech-lecture-vpc
 
+- AZ
+  - ap-northeast-1a 
+
 - サブネット ID
   - subnet-0694b05933b99fddf / raisetech-lecture-subnet-public1-ap-northeast-1a
 
