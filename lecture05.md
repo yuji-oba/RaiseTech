@@ -33,7 +33,7 @@
 
 - EC2 / VPC サブネット
 
-![02_ec2](images/lecture05/01_vpc.jpg)
+![02_ec2](images/lecture05/02_ec2.jpg)
 
 ![15_ec2](images/lecture05/15_ec2.jpg)
 
@@ -76,7 +76,7 @@
 - RDS / AZ VPC サブネットグループ サブネット セキュリティグループ
 ![04_rds](images/lecture05/04_rds.jpg)
 
-- RDS / AZ VPC サブネット
+- RDS / サブネット
 ![05_rds](images/lecture05/05_rds.jpg)
 
 - セキュリティ インバウンドルール
@@ -625,5 +625,5 @@ config.active_storage.service = :amazon
 ![26_s3](images/lecture05/26_s3.jpg)
 
 
-#### 構成図
+## 構成図
 ![diagram](images/lecture05/lecture05_diagram.jpg)
