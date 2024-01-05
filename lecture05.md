@@ -629,4 +629,4 @@ config.active_storage.service = :amazon
 
 
 ## 構成図
-![diagram](images/lecture05/lecture05_diagram_revise02.jpg)
+![diagram](images/lecture05/lecture05_diagram_revise03.jpg)
