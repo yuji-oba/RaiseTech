@@ -161,7 +161,7 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 ![30_cloudwatch](images/lecture06/30_cloudwatch.jpg)
 
 `Alarm Details:`
-- `State Change:OK -> ALARM` ← OKからアラーム状態に移行
+- `State Change:OK -> ALARM` ← `OK`から`アラーム`状態に移行
 - `Timestamp:Friday 19 January, 2024 10:59:22 UTC`
 - `Reason for State Change:  Threshold Crossed: no datapoints were received for 5 periods and 5 missing datapoints were treated as [Breaching].`
 
