@@ -1,6 +1,6 @@
 # lecture6
 
-## Cloud Trail
+## CloudTrail
 
 ### 設定
 
@@ -68,7 +68,7 @@
   - EC2が停止した場合にアラームを実行するために、しきい値を超えた扱いにする。
 
 
-### Cloud Watch アラームの動作確認
+### CloudWatch アラームの動作確認
 
 #### OKアクション
 
@@ -114,7 +114,7 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 
 ##### Unicornを停止してUnHealthyの状態にする。
 
-- サーバーの停止で`UnHealthy`の状態に
+- サーバーの停止で`Unhealthy`の状態に
 
 ![23_cloudwatch](images/lecture06/23_cloudwatch.jpg)
 
@@ -191,15 +191,15 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 - CloudWatchを適切に使用することで、安全かつ高パフォーマンスの運用ができるのだろうと考えた。
 
 
-## AWS Cost 管理
+## AWS コスト管理
 
-### 見積 Estimate
+### My Estimate
 
 #### Pricing Calculator
 
 ![01_cost](images/lecture06/01_cost.jpg)
 
-[今日までに作成したリソースの見積 YujiOba](https://calculator.aws/#/estimate?id=ef8b114049e0981264f18b02b2da7b5456dd034e)
+[今日までに作成したリソースの見積 YujiOba 修正版](https://calculator.aws/#/estimate?id=1db1927ec9786cd94af4d3196fa350e2882d1370)
 
 
 #### 見積設定
