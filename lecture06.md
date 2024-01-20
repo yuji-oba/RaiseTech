@@ -8,10 +8,10 @@
 
 ![26_cloudtrail](images/lecture06/26_cloudtrail.jpg)
 
-- 証跡名 : CloudTrail_WriteResouce_IAM_YujiOba
+- 証跡名 : `CloudTrail_WriteResouce_IAM_YujiOba`
 - 管理イベントのみ
 - 書き込みのみ
-- AWS KMSイベントの除外にチェック
+- AWS KMSイベントの除外
 - RDSのデータAPIイベントを除外
 
 
@@ -28,11 +28,11 @@
 
 - StartInstances
 
-![12_cloudtrail](RaiseTech/images/lecture06/12_cloudtrail.jpg)
+![12_cloudtrail](images/lecture06/12_cloudtrail.jpg)
 
-![13_cloudtrail](RaiseTech/images/lecture06/13_cloudtrail.jpg)
+![13_cloudtrail](images/lecture06/13_cloudtrail.jpg)
 
-![14_cloudtrail](RaiseTech/images/lecture06/14_cloudtrail.jpg)
+![14_cloudtrail](images/lecture06/14_cloudtrail.jpg)
 
 
 ##### イベントの情報を3つピックアップ
@@ -44,7 +44,7 @@
 
 ### CloudTrail イベント証跡から分かったこと
 
-- 上記以外にも`"arn"` (aws resource name リソースを一意に識別)、`"awsRegion"`(イベントのあったリージョン)、`"eventID"` (各イベントID CloudTrailが生成)などなど、一つのイベントが発生すると、事細かにイベントの情報が定義されるのが分かる。
+- 上記以外にも`arn` (aws resource name リソースを一意に識別)、`awsRegion`(イベントのあったリージョン)、`eventID` (各イベントID CloudTrailが生成)などなど、一つのイベントが発生すると、事細かにイベントの情報が定義されるのが分かる。
 - マネジメントコンソール上での操作では気にしなかったが、プログラム上ではEC2を起動するために多くの情報が必要とされることが分かった。
 
 
@@ -59,10 +59,10 @@
 ![17_cloudwatch](images/lecture06/17_cloudwatch.jpg)
 
 - 監視対象 : ELBとターゲットグループの`UnHealthyHostCount`
-- 異常なEC2が1台でもあればアラームを実行する。
-- 1分毎に収集したデータが5回連続で条件を満たした場合にアラームを実行する。
+- 異常なEC2が1台でもあれば`アラーム`を実行する。
+- 1分毎に収集したデータが5回連続で条件を満たした場合に`アラーム`を実行する。
 - `UnHealthyHost`がある場合アラームとしてSNSに通知する。
-- `UnHealthyHost`が無くなれば`HealthyHost`に移行したとしてOKアクションとしてSNS通知する。
+- `UnHealthyHost`が無くなれば`HealthyHost`に移行したとして`OK`アクションとしてSNS通知する。
 - `欠落データの処理`に欠落データを不正 (しきい値を超えている)として処理を選択。
   - EC2自体が停止している場合はデータ自体が取得できない。
   - EC2が停止した場合にアラームを実行するために、しきい値を超えた扱いにする。
@@ -74,11 +74,11 @@
 
 ##### ALBがUnhealthy→Healthyの状態へ
 
+- サーバーを起動して`Healthy`の状態に
+
 ![18_cloudwatch](images/lecture06/18_cloudwatch.jpg)
 
 ![19_cloudwatch](images/lecture06/19_cloudwatch.jpg)
-
-- サーバーを起動してHealthyの状態に
 
 
 ##### SNS通知
@@ -90,15 +90,15 @@
 SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウントIDなどが記載
 - `Alarm Details:`
   - `Name:CloudWatch_Alarm_HealthCheck`
-  - `State Change:OK -> ALARM`
-  - ``Timestamp:Friday 19 January, 2024 10:47:22 UTC`
+  - `State Change:ALARM -> OK` ← `OK`状態に移行 
+  - `Timestamp:Friday 19 January, 2024 10:47:22 UTC`
   - `AWS Account:***********`
 
 また、`Monitored Metric:`に監視対象のメトリックも記載されている
 - `Monitored Metric:`
   - `MetricNamespace:AWS/ApplicationELB`
   - `MetricName:UnHealthyHostCount`
-  - `Dimensions:[TargetGroup = targetgroup/tg-alb-ec2-rt-lecture-sample-app/b6e2bf31e92b1b3f]`
+  - `Dimensions:[TargetGroup = targetgroup/tg-alb-ec2-rt-lecture-sample-app/****************]`
     `[LoadBalancer = app/alb-ec2-rt-lecture-sample-app/****************]`
     `[AvailabilityZone = ap-northeast-1a]`
 
@@ -114,9 +114,9 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 
 ##### Unicornを停止してUnHealthyの状態にする。
 
-![23_cloudwatch](images/lecture06/23_cloudwatch.jpg)
+- サーバーの停止で`UnHealthy`の状態に
 
-- サーバーの停止でUnHealthyの状態に
+![23_cloudwatch](images/lecture06/23_cloudwatch.jpg)
 
 
 ##### SNS通知
@@ -125,8 +125,8 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 
 `Alarm Details:`
 - `Name:CloudWatch_Alarm_HealthCheck`
-- `State Change:OK -> ALARM`
-- ``Timestamp:Friday 19 January, 2024 10:59:22 UTC`
+- `State Change:OK -> ALARM` ← `アラーム`状態に移行
+- `Timestamp:Friday 19 January, 2024 10:59:22 UTC`
 - `AWS Account:***********`
 
 
@@ -141,17 +141,17 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 
 ![27_cloudwatch](images/lecture06/27_cloudwatch.jpg)
 
-- `UnHealthyHostCount`が1の時にアラーム状態になる
-- `UnHealthyHostCount`が0の時にOKになる。
+- `UnHealthyHostCount`が1の時に`アラーム`状態になる
+- `UnHealthyHostCount`が0の時に`OK`になる。
 
 
 #### 欠落データの処理の確認
 
 ##### EC2インスタンスを停止する
 
-![28_cloudwatch](images/lecture06/28_cloudwatch.jpg)
-
 - ヘルスステータスは`Unused`
+
+![28_cloudwatch](images/lecture06/28_cloudwatch.jpg)
 
 
 ##### SNS通知
@@ -161,7 +161,7 @@ SNS通知の`Alarm Details`には名前や状態の遷移、時間、アカウ�
 ![30_cloudwatch](images/lecture06/30_cloudwatch.jpg)
 
 `Alarm Details:`
-- `State Change:OK -> ALARM`
+- `State Change:OK -> ALARM` ← OKからアラーム状態に移行
 - `Timestamp:Friday 19 January, 2024 10:59:22 UTC`
 - `Reason for State Change:  Threshold Crossed: no datapoints were received for 5 periods and 5 missing datapoints were treated as [Breaching].`
 
