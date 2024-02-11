@@ -18,13 +18,13 @@
 
 | Templateファイル | 構築されるリソース | 備考 |
 | --------------- | -------------- | ---- |
-| ![cf_vpc_lecture.yml](cloudformation/lecture10/cf_vpc_lecture.yml) | VPC<br>Subnet<br>InternetGateway<br>RouteTable<br>Route | Subnetを`ap-northeast-1a`と`ap-northeast-1c`に配置し`InternetGateway`に接続するSubnetを`PublicSubnet`とする。 |
-| ![cf_securitygroup_lecture.yml](cloudformation/lecture10/cf_securitygroup_lecture.yml) | SecutiryGroup | 3つのセキュリティグループを構築<br> `EC2`のセキュリティグループ<br> `RDS`のセキュリティグループ<br> `ALB`のセキュリティグループ |
-| ![cf_iamrole_lecture.yml](cloudformation/lecture10/cf_iamrole_lecture.yml) | IAMRole | `S3`アクセス制限をアタッチする`IAMRole` |
-| ![cf_rds_lectrure.yml](cloudformation/lecture10/cf_rds_lectrure.yml) | DBInstance<br>DBSubnetGroup | `DB Engine`は`MySQL`<br>`DBSubnetGroup`は`PrivateSubnet`を指定 |
-| ![cf-ec2_lecture.yml](cloudformation/lecture10/cf-ec2_lecture.yml) | EC2Instance<br>KeyPair | `KeyPair`の値は`SystemManeger`>`パラメータストア`から取得 |
-| ![cf-alb_lecture.yml](cloudformation/lecture10/cf-alb_lecture.yml) | LoadBalancer | `ALB`を設定<br>`TargetGroup`を指定<br>`Listner`を定義 |
-| ![cf_s3_lecture.yml](cloudformation/lecture10/cf_s3_lecture.yml) | S3 Bucket | `パブリックアクセス`を全てブロック |
+| [cf_vpc_lecture.yml](cloudformation/lecture10/cf_vpc_lecture.yml) | VPC<br>Subnet<br>InternetGateway<br>RouteTable<br>Route | Subnetを`ap-northeast-1a`と`ap-northeast-1c`に配置し`InternetGateway`に接続するSubnetを`PublicSubnet`とする。 |
+| [cf_securitygroup_lecture.yml](cloudformation/lecture10/cf_securitygroup_lecture.yml) | SecutiryGroup | 3つのセキュリティグループを構築<br> `EC2`のセキュリティグループ<br> `RDS`のセキュリティグループ<br> `ALB`のセキュリティグループ |
+| [cf_iamrole_lecture.yml](cloudformation/lecture10/cf_iamrole_lecture.yml) | IAMRole | `S3`アクセス制限をアタッチする`IAMRole` |
+| [cf_rds_lectrure.yml](cloudformation/lecture10/cf_rds_lectrure.yml) | DBInstance<br>DBSubnetGroup | `DB Engine`は`MySQL`<br>`DBSubnetGroup`は`PrivateSubnet`を指定 |
+| [cf-ec2_lecture.yml](cloudformation/lecture10/cf-ec2_lecture.yml) | EC2Instance<br>KeyPair | `KeyPair`の値は`SystemManeger`>`パラメータストア`から取得 |
+| [cf-alb_lecture.yml](cloudformation/lecture10/cf-alb_lecture.yml) | LoadBalancer | `ALB`を設定<br>`TargetGroup`を指定<br>`Listner`を定義 |
+| [cf_s3_lecture.yml](cloudformation/lecture10/cf_s3_lecture.yml) | S3 Bucket | `パブリックアクセス`を全てブロック |
 
 
 
