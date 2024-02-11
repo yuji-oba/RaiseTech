@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation for ALB Resources
+
+Resources:
+# ----- ElasticLoadBalancingのApplicationLoadBalancerの定義 ----- #
+# ALBを設定
+  CFALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer #!RefはARN(AmazonResourceName)をreturn
+    Properties:
+      IpAddressType: ipv4
+      Name: CF-ALB-lecture
+      Scheme: internet-facing #ALBはinternet-facing
+      SecurityGroups:
+        - !ImportValue CF-SecurityGroup-ALB-ID
+      Subnets:
+        - !ImportValue CF-PublicSubnet-1a-ID
+        - !ImportValue CF-PublicSubnet-1c-ID
+      Tags:
+        - Key: Name
+          Value: CF-ALB-PublicSubnet-1a-1c
+
+# ----- ALBのTargetGroupの定義 ----- #
+  CFALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: CF-ALB-TargetGroup-lecture
+      Port: 80
+      Protocol: HTTP
+      Targets:
+        - Id: !ImportValue CF-EC2-ID
+          Port: 80
+      TargetType: instance
+      VpcId: !ImportValue CF-VPC-ID
+
+# ----- ALBのListenerの定義 ----- #
+  CFALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn:
+            !Ref CFALBTargetGroup #!RefはARN(AmazonResourceName)をreturn
+      LoadBalancerArn: !Ref CFALB #!RefはARN(AmazonResourceName)をreturn
+      Port: 80
+      Protocol: HTTP

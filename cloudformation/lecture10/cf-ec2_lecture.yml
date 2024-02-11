@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation for EC2 Resources
+
+Resources:
+# ----- KeyPairの定義 ----- #
+  NewKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: CFEC2KeyPair
+
+# ----- EC2の定義 ----- #
+  CFEC2:
+    Type: AWS::EC2::Instance #EC2Instanceの指定
+    Properties:
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true # パブリックIPアドレスの自動割り当て
+          SubnetId: !ImportValue CF-PublicSubnet-1a-ID #publicSubnet-1aに配置
+          GroupSet:
+            - !ImportValue CF-SecurityGroup-EC2-ID
+          DeviceIndex: 0
+      InstanceType: t2.micro # インスタンスのタイプ指定
+      ImageId: ami-0556b98d8e7a269f1 #AMIの指定 Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
+      IamInstanceProfile: !ImportValue CF-IamRole-S3FullAccess-RoleName
+      Tags:
+        - Key: Name
+          Value: CF-EC2-lecture
+      KeyName: !Ref NewKeyPair
+
+# ----- Outputs ----- #
+Outputs:
+  CFEC2:
+    Description: EC2 Instance ID
+    Value: !Ref CFEC2 #!RefのReturnValuesはInstanceのID
+    Export:
+      Name: CF-EC2-ID

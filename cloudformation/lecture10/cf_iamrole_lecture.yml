@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation for IAMRole Resources
+
+Resources:
+# ----- IAMRoleの定義 ----- #
+# S3のフルアクセス権限を付与 AWS管理ポリシーを指定
+  CFS3IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: CF-IAMRole-S3FullAccess-lecture
+      Description: Allow S3 FullAccess for CFEC2
+      AssumeRolePolicyDocument: #IAMRoleの信頼ポリシーの定義
+        Version: 2012-10-17
+        Statement: 
+          - Effect: Allow
+            Action: 
+              - sts:AssumeRole
+            Principal: 
+              Service: 
+                - ec2.amazonaws.com
+      ManagedPolicyArns: # 管理ポリシーの指定
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+  InstanceProfileS3FullAccess: 
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: !Ref CFS3IAMRole
+      Roles: 
+        - !Ref CFS3IAMRole
+
+# ----- Outputs ----- #
+Outputs:
+  CFS3IAMRole:
+    Description: IAMRole S3FullAccess RoleName 
+    Value: !Ref InstanceProfileS3FullAccess
+    Export:
+      Name: CF-IamRole-S3FullAccess-RoleName

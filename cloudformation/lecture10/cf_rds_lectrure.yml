@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation for RDS Resources
+
+Resources:
+# ----- RDSの定義 ----- #
+# DBの設定 ap-northeast-1aに配置 MySQL 
+  CFRDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage : 20
+      AvailabilityZone: ap-northeast-1a
+      DBInstanceClass: db.t3.micro
+      Port: 3306
+      StorageType: gp2 #ストレージタイプ 汎用SSD(gp2)
+      BackupRetentionPeriod: 1
+      MasterUsername: admin
+      MasterUserPassword: nasubi8431 # パスワード
+      DBInstanceIdentifier: CF-RDS-lecture
+      Engine: mysql
+      EngineVersion: 8.0.35 #latest MySQL Ver.
+      DBSubnetGroupName: !Ref CFRDSSubnetGroup
+      MultiAZ: false # マルチAZなし
+      VPCSecurityGroups:
+        - !ImportValue CF-SecurityGroup-RDS-ID
+
+# SubnetGroupの設定 PrivateSubnet-1aとPrivateSubnet-1cを設定
+  CFRDSSubnetGroup: #RDSを配置するPrivateSubnet-1aとPrivateSubnet-1cを指定
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: CF-RDS-SubnetGroup-1a-1c
+      DBSubnetGroupName: CF-RDS-SubnetGroup-lecture
+      SubnetIds:
+        - !ImportValue CF-PrivateSubnet-1a-ID
+        - !ImportValue CF-PrivateSubnet-1c-ID
