@@ -7,7 +7,7 @@
 ### 構成図
 
 #### CloudFormationで構築したリソースの構成図
-[diagram_lecture10](images/lecture10/diagram_lecture10.jpg)
+![diagram_lecture10](images/lecture10/diagram_lecture10.jpg)
 
 
 ### Template
