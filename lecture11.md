@@ -23,8 +23,8 @@
 
 ```zsh
 ec2-user/
-	├ raisetech-live8-sample-app
-	├ serverspec_test/
+  ├ raisetech-live8-sample-app
+  ├ serverspec_test/
 ```
 
 
@@ -45,14 +45,14 @@ Select a backend type:
 
 ```zsh
 ec2-user/
-	├ serverspec_test/
-		├ spec/
-			├ localhost/
-				├ sample_spec.rb
+  ├ serverspec_test/
+    ├ spec/
+      ├ localhost/
+      ├ sample_spec.rb
 ```
 
 
-- `sample_spec.rb`
+- `sample_spec.rb`ファイル
 
 ```ruby
 require 'spec_helper'
