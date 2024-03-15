@@ -2,19 +2,35 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: CloudFormation for RDS Resources
 
 Resources:
+# --- RDS username masterpasswordをSecretsManagerで管理する定義 --- #
+# username:admin --- #
+# password:16文字のランダムなパスワード --- #
+  CFRDSSecret: # RDSのパスワードとなるランダム文字列を生成
+    Type: "AWS::SecretsManager::Secret"
+    Properties:
+      Name: "CFRDSSecret"
+      Description: "RDS password for my RDS instance"
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "admin"}' #シークレットに含める項目
+        GenerateStringKey: "password" #シークレット項目に追加するキー
+        PasswordLength: 16 #16文字のランダムなパスワード
+        ExcludeCharacters: '"@/\' #password生成時に使えない文字を指定
+
 # ----- RDSの定義 ----- #
 # DBの設定 ap-northeast-1aに配置 MySQL 
   CFRDS:
     Type: AWS::RDS::DBInstance
     Properties:
       AllocatedStorage : 20
-      AvailabilityZone: ap-northeast-1a
+      AvailabilityZone: !Select # "ap-northeast-1a" hardcode不可 組み込み関数でAZを取得
+        - 0 #ap-northeast-1aを指定 配列から値を取得
+        - Fn::GetAZs: !Ref AWS::Region
       DBInstanceClass: db.t3.micro
       Port: 3306
       StorageType: gp2 #ストレージタイプ 汎用SSD(gp2)
       BackupRetentionPeriod: 1
       MasterUsername: admin
-      MasterUserPassword: nasubi8431 # パスワード
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${CFRDSSecret}:SecretString:password}}' # SecretsManagerのランダム文字列を参照 パスワードhardcode不可
       DBInstanceIdentifier: CF-RDS-lecture
       Engine: mysql
       EngineVersion: 8.0.35 #latest MySQL Ver.
