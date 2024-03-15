@@ -17,7 +17,9 @@ Resources:
     Properties:
       VpcId: !Ref CFVPC
       CidrBlock: 10.0.0.0/20
-      AvailabilityZone: "ap-northeast-1a"
+      AvailabilityZone: !Select # "ap-northeast-1a"hardcode不可 組込関数でAZの値を取得
+        - 0 # ap-northeast-1aを指定 配列から値を取得
+        - Fn::GetAZs: !Ref AWS::Region
       MapPublicIpOnLaunch: false #publicIPアドレスの設定
       Tags:
         - Key: Name
@@ -29,7 +31,9 @@ Resources:
     Properties:
       VpcId: !Ref CFVPC
       CidrBlock: 10.0.16.0/20
-      AvailabilityZone: "ap-northeast-1c"
+      AvailabilityZone: !Select # "ap-northeast-1c"hardcode不可 組込関数でAZの値を取得
+        - 1 # ap-northeast-1cを指定 配列から値を取得
+        - Fn::GetAZs: !Ref AWS::Region
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
@@ -41,7 +45,9 @@ Resources:
     Properties:
       VpcId: !Ref CFVPC
       CidrBlock: 10.0.128.0/20
-      AvailabilityZone: "ap-northeast-1a"
+      AvailabilityZone: !Select # "ap-northeast-1a"hardcode不可 組込関数でAZの値を取得
+        - 0 # ap-northeast-1aを指定 配列から値を取得
+        - Fn::GetAZs: !Ref AWS::Region
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
@@ -53,7 +59,9 @@ Resources:
     Properties:
       VpcId: !Ref CFVPC
       CidrBlock: 10.0.144.0/20
-      AvailabilityZone: "ap-northeast-1c"
+      AvailabilityZone: !Select # "ap-northeast-1c"hardcode不可 組込関数でAZの値を取得
+        - 1 # ap-northeast-1cを指定 配列から値を取得
+        - Fn::GetAZs: !Ref AWS::Region
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
