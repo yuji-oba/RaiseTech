@@ -1,0 +1,172 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation for VPC Resources
+
+Resources:
+  CFVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: CF-VPC-lecture
+
+# ----- subnetの定義 ----- #
+# PublicSubnet ap-northeast-1aに作成
+  CFPublicSubnet1a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref CFVPC
+      CidrBlock: 10.0.0.0/20
+      AvailabilityZone: "ap-northeast-1a"
+      MapPublicIpOnLaunch: false #publicIPアドレスの設定
+      Tags:
+        - Key: Name
+          Value: CF-PublicSubnet-1a-lecture
+
+# PublicSubnet ap-northeast-1cに作成
+  CFPublicSubnet1c:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref CFVPC
+      CidrBlock: 10.0.16.0/20
+      AvailabilityZone: "ap-northeast-1c"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: CF-PublicSubnet-1c-lecture
+
+# PrivateSubnet ap-northeast-1aに作成
+  CFPrivateSubnet1a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref CFVPC
+      CidrBlock: 10.0.128.0/20
+      AvailabilityZone: "ap-northeast-1a"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: CF-PrivateSubnet-1a-lecture
+
+# PrivateSubnet ap-northeast-1cに作成
+  CFPrivateSubnet1c:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref CFVPC
+      CidrBlock: 10.0.144.0/20
+      AvailabilityZone: "ap-northeast-1c"
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: CF-PrivateSubnet-1c-lecture
+
+# ----- InternetGatewayの定義 ----- #
+  CFInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: CF-InternetGateway-lecture
+
+  CFInternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId : !Ref CFInternetGateway
+      VpcId: !Ref CFVPC
+
+# ----- RouteTableの定義 ----- #
+# PublicSubnet-1aとPublicSubnet-1cのRouteTable
+  CFRouteTablePublicSubnet1a1c:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref CFVPC
+      Tags:
+        - Key: Name
+          Value: CF-RouteTable-PublicSubnet-1a-1c-lecture
+
+# PrivateSubnet-1aのRouteTable
+  CFRouteTablePrivateSubnet1a:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref CFVPC
+      Tags:
+        - Key: Name
+          Value: CF-RouteTable-PrivateSubnet-1a-lecture
+
+# PrivateSubnet-1cのRouteTable
+  CFRouteTablePrivateSubnet1c:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref CFVPC
+      Tags:
+        - Key: Name
+          Value: CF-RouteTable-PrivateSubnet-1c-lecture
+
+# ----- Routeの定義 ----- #
+# PublicSubnet-1aとPublicSubnet-1cのRouteをInternetGatewayに繋げる
+  CFRoutePublicSubnet:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref CFRouteTablePublicSubnet1a1c
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref CFInternetGateway
+
+# ----- RouteTableとSubnetの紐付け定義 ----- #
+# PublicSubnet-1a
+  CFRouteTableAssociationPublicSubnet1a:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref CFRouteTablePublicSubnet1a1c
+      SubnetId: !Ref CFPublicSubnet1a
+
+# PublicSubnet-1c
+  CFRouteTableAssociationPublicSubnet1c:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref CFRouteTablePublicSubnet1a1c
+      SubnetId: !Ref CFPublicSubnet1c
+
+# PrivateSubnet-1a
+  CFRouteTableAssociationPrivateSubnet1a:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref CFRouteTablePrivateSubnet1a
+      SubnetId: !Ref CFPrivateSubnet1a
+
+# PrivateSubnet-1c
+  CFRouteTableAssociationPrivateSubnet1c:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref CFRouteTablePrivateSubnet1c
+      SubnetId: !Ref CFPrivateSubnet1c
+
+# ----- Outputs ----- #
+Outputs:
+  CFVPC:
+    Description: VPC ID
+    Value: !Ref CFVPC #!RefのReturnValuesはVPCのID 
+    Export:
+      Name: CF-VPC-ID #Name of resource to export
+
+  CFPublicSubnet1a:
+    Description: PublicSubnet ID located in ap-northeast-1a
+    Value: !Ref CFPublicSubnet1a #!RefのReturnValuesはsubnetのID
+    Export:
+      Name: CF-PublicSubnet-1a-ID
+
+  CFPublicSubnet1c:
+    Description: PublicSubnet ID located in ap-northeast-1c
+    Value: !Ref CFPublicSubnet1c #!RefのReturnValuesはsubnetのID
+    Export:
+      Name: CF-PublicSubnet-1c-ID
+
+  CFPrivateSubnet1a: #RDSを配置するPrivateSubnet1aをoutput
+    Description: PrivateSubnet ID located in ap-northeast-1a
+    Value: !Ref CFPrivateSubnet1a #!RefのReturnValuesはsubnetのID
+    Export:
+      Name: CF-PrivateSubnet-1a-ID
+
+  CFPrivateSubnet1c: #RDSを配置するSubnetGroupに必要なPrivateSubnet1cをoutput
+    Description: PrivateSubnet ID located in ap-northeast-1c
+    Value: !Ref CFPrivateSubnet1c #!RefのReturnValuesはsubnetのID
+    Export:
+      Name: CF-PrivateSubnet-1c-ID
