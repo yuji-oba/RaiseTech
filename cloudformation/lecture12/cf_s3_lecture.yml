@@ -7,7 +7,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: cf-s3-lecture #BucketNameに大文字は使用不可
-      AccessControl: Private
+      # AccessControl: Private ## defaultでPrivateで作成される。Private以外でデプロイできないので記述は必要無し。
       PublicAccessBlockConfiguration: #全てtrueにすることでパブリックアクセスを全てブロックの設定になる
         BlockPublicAcls: True
         BlockPublicPolicy: True
