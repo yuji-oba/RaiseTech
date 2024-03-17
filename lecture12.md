@@ -6,15 +6,15 @@
 
 ## 目次
 
-- CircleCIを利用した自動テスト結果
-  1. CicrcleCI実行環境の準備
-  2. CircleCI自動テスト実行とエラー内容
-  3.  エラー解消と自動テスト成功
+**CircleCIを利用した自動テスト結果**
+1. CircleCI実行環境の準備
+2. CircleCI自動テスト実行とエラー内容
+3. エラー解消と自動テスト成功
 
 以下、課題に対しての導入部分として記載
-- CircleCI導入
-  1. CircleCi登録~GitHub連携
-  2. test用リポジトリでテスト
+**CircleCI導入**
+1. CircleCi登録~GitHub連携
+2. test用リポジトリでテスト
 
 
 ## CircleCIを利用した自動テスト結果
