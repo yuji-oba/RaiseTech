@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation for SecurityGroups Resources
+
+Resources:
+# ----- SecurityGroupの定義 ----- #
+# EC2 自機MacでのSSH接続 80portへのHTTP接続を許可
+  CFSecurityGroupEC2:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http ssh access
+      GroupName: cf-securitygroup-EC2-lecture-ssh-http
+      SecurityGroupIngress: #インバウンドルール
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 106.73.168.225/32
+          Description: Allow SSH access for my PC
+        
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+          Description: Allow HTTP access
+      Tags:
+        - Key: Name
+          Value: cf-securitygroup-EC2-lecture
+      VpcId: !ImportValue CF-VPC-ID
+
+# RDS EC2のアクセスを許可
+  CFSecurityGroupRDS:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow RDS access for EC2
+      GroupName: cf-securitygroup-RDS-lecture-admin
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref CFSecurityGroupEC2 #EC2のSecurityGroupのID参照
+          Description: Allow db MySQL access for admin
+      Tags:
+        - Key: Name
+          Value: cf-securitygroup-RDS-lecture
+      VpcId: !ImportValue CF-VPC-ID
+
+# ALB 80portへのHTTP接続を許可
+  CFSecurityGroupALB:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow ALB access to EC2
+      GroupName: cf-securitygroup-ALB-EC2
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+          Description: Allow HTTP access
+      Tags:
+        - Key: Name
+          Value: cf-securitygroup-ALB
+      VpcId: !ImportValue CF-VPC-ID
+
+# ----- Outputs ----- #
+Outputs:
+  CFSecurityGroupEC2:
+    Description: SecurityGroup ID for EC2 #Information about the value
+    Value: !Ref CFSecurityGroupEC2 #!RefのReturnValuesはSecurityGroupのID
+    Export:
+      Name: CF-SecurityGroup-EC2-ID
+
+  CFSecurityGroupRDS:
+    Description: SecurityGroup ID for RDS 
+    Value: !Ref CFSecurityGroupRDS
+    Export:
+      Name: CF-SecurityGroup-RDS-ID
+
+  CFSecurityGroupALB:
+    Description: SecurityGroup ID for ALB
+    Value: !Ref CFSecurityGroupALB
+    Export:
+      Name: CF-SecurityGroup-ALB-ID
