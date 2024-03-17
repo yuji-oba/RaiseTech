@@ -7,20 +7,20 @@
 ## 目次
 
 - CircleCIを利用した自動テスト結果
-  - CicrcleCI実行環境の準備
-  - CircleCI自動テスト実行とエラー内容
-  - エラー解消と自動テスト成功
+  1. CicrcleCI実行環境の準備
+  2. CircleCI自動テスト実行とエラー内容
+  3.  エラー解消と自動テスト成功
 
 以下、課題に対しての導入部分として記載
-
 - CircleCI導入
-  - CircleCi登録~GitHub連携
-  - test用リポジトリでテスト
+  1. CircleCi登録~GitHub連携
+  2. test用リポジトリでテスト
+
 
 ## CircleCIを利用した自動テスト結果
 
 
-### CicrcleCI実行環境の準備
+### 1. CicrcleCI実行環境の準備
 ---
 
 
@@ -84,7 +84,7 @@ workflows:
 ![cci_15](images/lecture12/cci_15.jpg)
 
 
-### CircleCI自動テスト実行とエラー内容
+### 2. CircleCI自動テスト実行とエラー内容
 ---
 
 
@@ -134,17 +134,17 @@ AccessControl: Private
 ```
 
 defaultでPrivateで作成される。
-Private以外でデプロイできない為、記述不要
+Private以外でデプロイできない為、記述不要。
 
 
-### エラー解消と自動テスト成功
+### 3. エラー解消と自動テスト成功
 ---
 
 
 #### テンプレートファイルの修正
 
 - cf_vpc_lecture.yml
-  - 組み込み関数を使用して、`ap-northeast-1a`配列の値から取得する記述に変更
+  - 組み込み関数を使用して、`ap-northeast-1a`配列の値から取得する記述に変更。
 
 ```yaml
   CFPublicSubnet1a:
@@ -159,9 +159,9 @@ Private以外でデプロイできない為、記述不要
 
 
 - cf_rds_lecture.yml
-  - `SecretsManager`を利用して`username`と`masterpassword`を管理する記述を追加
-  - AZを組み込み関数で取得する記述に変更
-  - `MasterUserPassword`を`SecretsManager`から取得する記述に変更
+  - `SecretsManager`を利用して`username`と`masterpassword`を管理する記述を追加。
+  - AZを組み込み関数で取得する記述に変更。
+  - `MasterUserPassword`を`SecretsManager`から取得する記述に変更。
 
 ```yaml
 Resources:
@@ -202,7 +202,7 @@ Resources:
 
 
 - cf_s3_lecture.yml
-  - `AccessControl`の記述をコメントアウト
+  - `AccessControl`の記述をコメントアウト。
 
 ```yaml
 # ----- S3の定義 ----- #
@@ -226,12 +226,12 @@ Resources:
 ![cci_19](images/lecture12/cci_19.jpg)
 
 
-以下、課題に対しての導入部分として記載
+以下、課題に対しての導入部分として記載する。
 
 ## CircleCI導入
 
 
-### CircleCi登録~GitHub連携
+### 1. CircleCi登録~GitHub連携
 ---
 
 
@@ -243,8 +243,8 @@ Resources:
 
 #### GitHub連携
 
-- レポジトリに`CircleCI_test`を追加してCircleCI動作のテストをする
-- CircleCIのproject作成の手順に従って進める
+- レポジトリに`CircleCI_test`を追加してCircleCI動作のテストをする。
+- CircleCIのproject作成の手順に従って進める。
 - プロジェクト名は`test01`とする。（CircleCI動作確認のテスト用）
 
 ![cci_01](images/lecture12/cci_01.jpg)
@@ -259,7 +259,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/project_key -C email@example.com
 ```
 
 
-2. `public SSH key`をGitHubの`deploy keys`として登録
+2. `public SSH key`をGitHubの`deploy keys`として登録。
 
 - `pbcopy`コマンドで`project_key.pub`ファイルの中身をクリップボードにコピー。
 
@@ -268,23 +268,23 @@ pbcopy < ~/.ssh/project_key.pub
 ```
 
 
-- コピーした`project_key.pub`をGitHubの`Develop Keys/Add new`の`key`に追加
+- コピーした`project_key.pub`をGitHubの`Develop Keys/Add new`の`key`に追加。
 - Title：任意
 
 ![cci_02](images/lecture12/cci_02.jpg)
 
 
-3. `private SSH key`をCircleCIに登録
+3. `private SSH key`をCircleCIに登録。
 
-- `project_key`のファイルの中身をコピー
+- `project_key`のファイルの中身をコピー。
 
 ```zsh
 pbcopy < ~/.ssh/project_key
 ```
 
 
-- CircleCIのプロジェクト作成画面で`private SSH key`を登録
-- Repositoryを選択 → `CircleCI_test`のレポジトリでテストする
+- CircleCIのプロジェクト作成画面で`private SSH key`を登録。
+- Repositoryを選択 → `CircleCI_test`のレポジトリでテストする。
 
 ![cci_05](images/lecture12/cci_05.jpg)
 
@@ -296,7 +296,7 @@ pbcopy < ~/.ssh/project_key
 ![cci_06](images/lecture12/cci_06.jpg)
 
 
-### test用リポジトリでテスト
+### 2. test用リポジトリでテスト
 ---
 
 - test用の`CircleCI_test`リポジトリをクローンする。
@@ -306,12 +306,12 @@ pbcopy < ~/.ssh/project_key
 
 #### test用CircleCI実行環境の準備
 
-- ローカルPCに`CircleCI_test`リポジトリをクローン
+- ローカルPCに`CircleCI_test`リポジトリをクローン。
 
 ![cci_07](images/lecture12/cci_07.jpg)
 
 
-- `CircleCI_test`ディレクトリの構成を下記のようにする
+- `CircleCI_test`ディレクトリの構成を下記のようにする。
 
 ```zsh
 .circleci
@@ -320,7 +320,7 @@ README.md
 ```
 
 
-- `config.yml`は下記のように記述
+- `config.yml`は下記のように記述。
 
 ```yml
 version: 2.1 #設定ファイルの記述方法
@@ -352,7 +352,10 @@ workflows: #定義したjobの実行タイミング
 ![cci_20](images/lecture12/cci_20.jpg)
 
 `Sign up enviroment`:環境設定
+
 `Preparing enviroment variables`:環境変数の設定
+
 `Checkout code`:stepsで記述したcheckout
+
 `echo`:runで実行させたコマンドの名前
 
