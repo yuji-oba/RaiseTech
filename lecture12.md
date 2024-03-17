@@ -20,7 +20,8 @@
 ## CircleCIを利用した自動テスト結果
 
 
-### 1. CicrcleCI実行環境の準備
+1. ### CicrcleCI実行環境の準備
+
 ---
 
 
@@ -84,7 +85,7 @@ workflows:
 ![cci_15](images/lecture12/cci_15.jpg)
 
 
-### 2. CircleCI自動テスト実行とエラー内容
+2. ### CircleCI自動テスト実行とエラー内容
 ---
 
 
@@ -137,7 +138,7 @@ defaultでPrivateで作成される。
 Private以外でデプロイできない為、記述不要。
 
 
-### 3. エラー解消と自動テスト成功
+3. ### エラー解消と自動テスト成功
 ---
 
 
@@ -231,7 +232,7 @@ Resources:
 ## CircleCI導入
 
 
-### 1. CircleCi登録~GitHub連携
+1. ### CircleCi登録~GitHub連携
 ---
 
 
@@ -296,7 +297,7 @@ pbcopy < ~/.ssh/project_key
 ![cci_06](images/lecture12/cci_06.jpg)
 
 
-### 2. test用リポジトリでテスト
+2. ### test用リポジトリでテスト
 ---
 
 - test用の`CircleCI_test`リポジトリをクローンする。
